@@ -29,11 +29,11 @@ Before using this package please make sure your props are valid and all the requ
 
 ## Props
 
-   amount             : Total amount that is payed through paypal.                      (Required)-(STRING OR NUMBER)
-   orderID            : Unique TransactionID.                                           (Required)-(STRING)
-   ProductionClientID : Unique identification that is obtained from paypal dev account  (Required)-(STRING)
-   success            : Callback that is fired after transaction has been Successful.   (Optional)-(FUNCTION)
-   failed             : Callback that is fired if transaction has is failed.            (Optional)-(FUNCTION)
+  * amount             : Total amount that is payed through paypal.                      (Required)-(STRING OR NUMBER)
+  * orderID            : Unique TransactionID.                                           (Required)-(STRING)
+  * ProductionClientID : Unique identification that is obtained from paypal dev account  (Required)-(STRING)
+  * success            : Callback that is fired after transaction has been Successful.   (Optional)-(FUNCTION)
+  * failed             : Callback that is fired if transaction has is failed.            (Optional)-(FUNCTION)
    
 ## Contributing
 
