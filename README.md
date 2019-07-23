@@ -11,7 +11,7 @@ Paypal integration with expo ReactNative
 ## Usage :
 Before using this package please make sure your props are valid and all the required info are filled up in paypal.html inside package folder
 
-```js
+```bash
 
    <PayPal 
           amount={20}//i.e $20 
