@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>RNExpo-Paypal-integration</title>
+        <script src="https://www.paypal.com/sdk/js?client-id=<CLIENT-ID>&currency=<CURRENCY>"></script>
+        <style>
+            body,
+            html{
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(180deg, #3d40ad 0, #6b6ed7 100%)
+            }
+            .container {
+                height: 100%;
+                display: flex;
+                margin-left: 20px;
+                margin-right: 20px;
+                overflow-y: scroll;
+                justify-content: center;
+                align-items: center
+            }
+            p{
+                color: #fff;
+                font-size: 16px;
+                text-align: justify;
+                margin-bottom: 50px
+            }
+            #preloaderSpinner {
+                display: none
+            }
+        </style>
+    </head><!--  -->
+    <body>
+        <div class="container">
+            <div style="justify-content: center; text-align: center">
+                <p>YOUR INFO</p>
+                <div id="paypal-button-container"></div>
+            </div>
+        </div>
+        <script>
+            function payWithPayPal(e, n) {
+                var Errors = ()=> console.error('Please Supply valid Props , For More Info Visit : https://github.com/nirikshan/RNExpo-Paypal-integration');
+                var ProductionClientID = e.ProductionClientID;
+                if(null == ProductionClientID || null == e.orderID){
+                    Errors();
+                }
+                paypal.Buttons({
+                    env: "live",
+                    client: {
+                        production: ProductionClientID
+                    },
+                    commit: !0,
+                    createOrder: function(n, t) {
+                        return t.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: e
+                                }
+                            }]
+                        })
+                    },
+                    onAuthorize: function(e, n) {
+                        return n.payment.execute().then(function() {
+                            window.alert("Payment Complete!")
+                        })
+                    },
+                    onApprove: function(e, n) {
+                        window.postMessage(JSON.stringify({
+                            reference: e.orderID,
+                            message: "Transaction Successful",
+                            status: "Success"
+                        }))
+                    },
+                    onCancel: function(e) {
+                        window.postMessage(JSON.stringify({
+                            reference: null,
+                            message: "Transaction failed",
+                            status: "Failed"
+                        }))
+                    }
+                }).render("#paypal-button-container")
+            }
+            document.addEventListener("message", function(e) {
+                var n = JSON.parse(e.data);
+                if(null == n.ProductionClientID || null == n.orderID || null == n.amount){
+                    Errors();
+                }
+                document.querySelector("p").innerText = "You are about to fund your wallet with USD " + n.amount + " on Amejman . Click on any of the payment options to proceed. Your account will be credited instantly after payment.", payWithPayPal(n.amount, n.orderID)
+            });
+        </script>
+    </body>
+  
+    </html>
