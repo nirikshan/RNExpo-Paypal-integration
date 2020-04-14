@@ -6,7 +6,11 @@ Paypal integration with expo ReactNative
 
   ```bash
   npm i rn-expo-paypal-integration
-  ``` 
+  ```
+  or
+  ```bash
+  yarn add rn-expo-paypal-integration
+  ```
   
 ## Usage :
 Before using this package please make sure your props are valid and all the required info are filled up in paypal.html inside package folder
