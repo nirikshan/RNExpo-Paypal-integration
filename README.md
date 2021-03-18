@@ -22,7 +22,7 @@ Before using this package please make sure your props are valid and all the requ
           orderID={<orderId(string)>} //transactionID
           ProductionClientID={<ProductionClientID(string)>}
           success={(a)=>{
-                //callback after payment has been successfully compleated
+                //callback after payment has been successfully completed
                 console.log(a)
           }} 
           failed={(a)=>{
